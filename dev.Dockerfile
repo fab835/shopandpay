@@ -14,8 +14,7 @@ COPY . .
 RUN npm install
 
 EXPOSE 5000
-ENTRYPOINT ["tail", "-f", "/dev/null"]
 
-# RUN npx prisma generate
+RUN npx prisma generate
 
-# CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "dev" ]
