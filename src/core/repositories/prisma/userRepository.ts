@@ -16,6 +16,31 @@ export class UserRepository implements IUserRepository {
     }
   }
 
+  public async index(): Promise<User[] | Error> {
+    try {
+        let users =  await prisma.user.findMany()
+
+        return users
+    } catch (error : any) {
+      return new Error(error)
+    }
+  }
+
+  public async updateWallet(id: string, wallet_total_cents: number): Promise<User | Error> {
+    try {
+        let updatedUser = await prisma.user.update({
+          where: {
+            id: id
+          },
+          data: {wallet_total_cents},
+        })
+
+        return updatedUser
+    } catch (error : any) {
+      return new Error(error)
+    }
+  }
+  
   public async find(id: string): Promise<User | Error> {
     try{
         let user = await prisma.user.findUnique({

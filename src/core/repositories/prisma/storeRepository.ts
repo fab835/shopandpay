@@ -17,6 +17,31 @@ export class StoreRepository implements IStoreRepository {
     }
   }
 
+  public async index(): Promise<Store[] | Error> {
+    try {
+        let stores =  await prisma.store.findMany()
+
+        return stores
+    } catch (error : any) {
+      return new Error(error)
+    }
+  }
+
+  public async updateWallet(id: string, wallet_total_cents: number): Promise<Store | Error> {
+    try {
+        let updatedStore = await prisma.store.update({
+          where: {
+            id: id
+          },
+          data: {wallet_total_cents},
+        })
+
+        return updatedStore
+    } catch (error : any) {
+      return new Error(error)
+    }
+  }
+
   public async find(id: string): Promise<Store | Error> {
     try{
         let store = await prisma.store.findUnique({

@@ -5,6 +5,6 @@ import { adaptRoute } from '../core/infra/adapters/ExpressRouteAdapter'
 
 const transfersRouter = Router()
 
-transfersRouter.get('/new', adaptRoute(makeCreateTransferController()))
+transfersRouter.post('/new', adaptRoute(makeCreateTransferController()))
 
 export { transfersRouter }

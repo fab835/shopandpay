@@ -4,7 +4,7 @@ import { ITransferRepository } from '../ITransferRepository';
 
 export class TransferRepository implements ITransferRepository {
 
-  public async create(transfer: Transfer): Promise<Transfer | Error> {
+  public async create(transfer: TransferCreateInputs): Promise<Transfer | Error> {
     try {
         let createdTransfer =  await prisma.transfer.create({
             data: transfer
