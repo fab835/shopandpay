@@ -1,9 +1,9 @@
-import { CreateTransfer } from "../../../core/useCases/transfers/CreateTransfer/createTransfer"
+import { CreateTransfer } from "../../useCases/transfers/CreateTransfer/CreateTransfer"
 import { Controller } from "../../../core/infra/Controller"
 import { CreateTransfersController } from "./CreateTransfersControllerFactory"
-import { UserRepository } from "../../../core/repositories/prisma/userRepository"
-import { StoreRepository } from "../../../core/repositories/prisma/storeRepository"
-import { TransferRepository } from "../../../core/repositories/prisma/transferRepository"
+import { UserRepository } from "../../repositories/prisma/userRepository"
+import { StoreRepository } from "../../repositories/prisma/storeRepository"
+import { TransferRepository } from "../../repositories/prisma/transferRepository"
 
 export const makeCreateTransferController = (): Controller => {
     const userRepository = new UserRepository() // here we'll set repository where find user (value sender)

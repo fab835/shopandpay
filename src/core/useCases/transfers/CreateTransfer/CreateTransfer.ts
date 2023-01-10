@@ -18,9 +18,9 @@ export class CreateTransfer implements IUseCase {
             // RULES
             // 1. User and store need to exist
             const user = await this.userRepository.find(sender)
-            if(user instanceof Error) return new Error("sender not found")
+            if(user instanceof Error) return user
             const store = await this.storeRepository.find(receiver)
-            if(store instanceof Error) return new Error("receiver not found")
+            if(store instanceof Error) return store
             
             // 2. Only transfer if user have total_cents to transfer in your wallet
             if(Number(user.wallet_total_cents) < total_cents) return new Error("insufficient funds")
