@@ -7,8 +7,11 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --exit-child --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts"
+    "db_migrate:test": "dotenv -e .env.test -- npx prisma migrate dev --name postgres-init",
+    "db_migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev --name init",
+    "db_seed:dev" :"dotenv -e .env.development npx prisma db seed",
+    "test": "dotenv -e .env.test jest -i",
+    "dev": "dotenv -e .env.development ts-node-dev --exit-child --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.8.1",
@@ -19,9 +22,13 @@
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.15",
+    "@types/jest": "^29.2.5",
     "@types/node": "^18.11.18",
+    "jest": "^29.3.1",
+    "jest-mock-extended": "^2.0.4",
     "nodemon": "^2.0.20",
     "prisma": "^4.8.1",
+    "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "tslib": "^2.4.1",
