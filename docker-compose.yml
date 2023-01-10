@@ -10,6 +10,7 @@ services:
       POSTGRES_PASSWORD: 'developer123'
       POSTGRES_DB: 'shop_and_pay_development'
     volumes:
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
       - db_data:/var/lib/postgresql/data
   server:
     build:
