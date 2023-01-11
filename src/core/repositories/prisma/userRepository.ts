@@ -4,7 +4,7 @@ import { User } from "@prisma/client";
 
 export class UserRepository implements IUserRepository {
 
-  public async create(user: User): Promise<User | Error> {
+  public async create(user: UserCreateInputs): Promise<User | Error> {
     try {
         let createdUser =  await prisma.user.create({
             data: user
@@ -48,6 +48,26 @@ export class UserRepository implements IUserRepository {
         })
 
         return !!user ? user : new Error("User not found")
+    }catch (error : any) {
+        return new Error(error)
+    }
+  }
+
+  public async find_by(key: UserFindKeys , value: string): Promise<User[] | Error> {
+
+    const search_params = {
+      id: {id: value },
+      email: {email: value },
+      name: {name: value },
+      cpf_cnpj: {cpf_cnpj: value },
+    }
+    
+    try{
+        let users = await prisma.user.findMany({
+            where: search_params[key]
+        })
+
+        return !!users ? users : new Error("User not found")
     }catch (error : any) {
         return new Error(error)
     }
