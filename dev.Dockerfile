@@ -12,6 +12,7 @@ COPY package.json package-lock.json ./
 # COPY yarn.lock .
 COPY . .
 RUN npm install
+RUN npm install -g dotenv-cli
 
 EXPOSE 5000
 
