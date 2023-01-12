@@ -24,10 +24,10 @@ export class EmailSender{
       },
     }
 
-    let url = this.baseUrl + '/notify'
+    let url = '/notify'
     return await this.httpRequest
                   .fetch(this.httpRequest.METHOD.POST, url, data)
-                  .then(response => response)
+                  .then(response => response.data)
                   .catch(error => error)
   }
 }

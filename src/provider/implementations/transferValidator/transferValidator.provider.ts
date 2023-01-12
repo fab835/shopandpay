@@ -20,11 +20,11 @@ export class TransferValidator{
         transfer_amount: transfer_total_cents
     }
 
-    let url = `${this.baseUrl}/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6`
+    let url = `/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6`
 
     return await this.httpRequest
                         .fetch(this.httpRequest.METHOD.POST, url, data)
-                        .then(response => response.body)
+                        .then(response => response.data)
                         .catch(error => error)
   }
 }
