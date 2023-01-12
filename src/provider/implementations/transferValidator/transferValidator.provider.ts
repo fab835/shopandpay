@@ -12,7 +12,7 @@ export class TransferValidator{
     this.httpRequest = new HTTPRequest(this.baseUrl)
   }
 
-  public async sendAnSms(user:User, store: Store, transfer_total_cents: number): Promise<ITransferValidatorResponse> {
+  public async validate(user:User, store: Store, transfer_total_cents: number): Promise<ITransferValidatorResponse> {
     
     let data = {
         sender_data: user,
