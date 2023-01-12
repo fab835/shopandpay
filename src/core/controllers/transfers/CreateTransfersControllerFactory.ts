@@ -8,10 +8,12 @@ export class CreateTransfersController implements Controller {
     private readonly createTransfer: IUseCase,
   ) {}
 
-  async handle({sender, receiver, total_cents}: HTTPRequestObject): Promise<THttpResponse> {
+  async handle({uid, store_id, total_cents}: HTTPRequestObject): Promise<THttpResponse> {
+    
+    let createTransferReturn: Object | Error = await this.createTransfer.execute({uid, store_id, total_cents})
+    
+    if(createTransferReturn instanceof Error) return httpResponse( StatusCode.clientError , createTransferReturn.message)
 
-    let createTransferReturn: Object | Error = await this.createTransfer.execute({sender, receiver, total_cents})
-
-    return httpResponse(createTransferReturn instanceof Error ? StatusCode.clientError : StatusCode.ok , createTransferReturn)
+    return httpResponse( StatusCode.ok , createTransferReturn)
   }
 }

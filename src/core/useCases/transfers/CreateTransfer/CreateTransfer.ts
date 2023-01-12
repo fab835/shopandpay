@@ -12,14 +12,14 @@ export class CreateTransfer implements IUseCase {
         private readonly transferRepository: TransferRepository
     ){}
 
-    public execute = async ({sender, receiver, total_cents}: HTTPRequestObject): Promise<Object | Error> => {
+    public execute = async ({uid, store_id, total_cents}: HTTPRequestObject): Promise<Object | Error> => {
         try{
-            if (!total_cents || !receiver || !sender) return {error: "missing params"}
+            if (!total_cents || !store_id || !uid) return {error: "missing params"}
             // RULES
             // 1. User and store need to exist
-            const user = await this.userRepository.find(sender)
+            const user = await this.userRepository.find_by('uid', uid)
             if(user instanceof Error) return user
-            const store = await this.storeRepository.find(receiver)
+            const store = await this.storeRepository.find(store_id)
             if(store instanceof Error) return store
             
             // 2. Only transfer if user have total_cents to transfer in your wallet

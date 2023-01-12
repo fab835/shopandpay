@@ -1,24 +1,25 @@
 import { Request, Response } from 'express'
+import { IAuthenticator } from '../../../middlewares/Authenticator'
 
 import { Controller } from '../Controller'
 
-export const adaptRoute = (controller: Controller) => {
+export const adaptRoute = (controller: Controller ) => {
   return async (request: Request, response: Response) => {
+    const authParams = request.headers;
+    const {uid} = authParams;
 
     const requestData = {
       ...request.body,
       ...request.params,
-      ...request.query
+      ...request.query,
+      uid: uid
     }
     
     const httpResponse = await controller.handle(requestData)
 
-    if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
-      return response.status(httpResponse.statusCode).json(httpResponse.body)
-    } else {
-      return response.status(httpResponse.statusCode).json({
-        error: httpResponse.body.error,
-      })
-    }
+    if(!!httpResponse.headers) Object.keys(httpResponse.headers).forEach((key) => response.setHeader(key, String(httpResponse.headers[key])));
+
+    return response.status(httpResponse.statusCode).json(httpResponse.body)
+    
   }
 }

@@ -1,6 +1,7 @@
 export type THttpResponse = {
     statusCode: number
     body: any
+    headers: any
 }
 export const StatusCode = {
     ok: 200,
@@ -14,10 +15,11 @@ export const StatusCode = {
     fail: 500
 }
 
-export function httpResponse<T>(statusCode: number, dto?: T): THttpResponse {
+export function httpResponse<T>(statusCode: number, dto?: T, header?: T): THttpResponse {
     return {
         statusCode: statusCode,
-        body: dto
+        body: dto,
+        headers: header
     }
 }
   
