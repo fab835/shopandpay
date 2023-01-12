@@ -36,8 +36,8 @@ $ docker-compose exec server npm run db_seed:dev
 ## 3. Routes workflow
 | Routes        | Function      | Status        | Need authentication |
 | ------------- | ------------- | ------------- | ------------- |
-| /users/new [POST]    | register user  |  done    | no |
-| /users/login [POST]  | login user  | done  | no |
+| /users/sign_up [POST]    | register user  |  done    | no |
+| /users/sign_in [POST]  | login user  | done  | no |
 | /users/edit [PUT]    | edit user  | in_work  | yes |
 | /users/show [GET]    | details of logged user  | in_work  | yes |
 | /transfers/new [POST]  | Create trasnsfer  | done  | yes |
