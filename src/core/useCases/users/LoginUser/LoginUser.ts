@@ -49,8 +49,9 @@ export class LoginUser implements IUseCase {
             // ##### END CREATE MEW FUNCTION FOR THIS #####
             
             // Use client hash to save in db
-            let userTokens = {} as any;
+            let userTokens = JSON.parse(userFinded.tokens as any);
             userTokens[String(client)] = { token: encryptedToken, expiry: expiry };
+
 
             // prepare user data 
             const user_data : UserUpdateTokensInputs = {
