@@ -26,7 +26,7 @@ export class HTTPRequest implements IHTTPRequest {
 
     return new Promise<any>((resolve, reject) => {
       axios({
-        url: `${this.baseUrl} + ${url}`,
+        url: `${this.baseUrl}${url}`,
         method,
         data: body,
         headers: this.headers
