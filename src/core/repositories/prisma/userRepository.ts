@@ -47,33 +47,34 @@ export class UserRepository implements IUserRepository {
             where: { id }
         })
 
-        return !!user ? user : new Error("User not found")
+        return !user || Object.keys(user as Object).length === 0 ? new Error("User not found") : user
     }catch (error : any) {
         return new Error(error)
     }
   }
 
-  public async find_by(key: UserFindKeys , value: string): Promise<User[] | Error> {
+  public async find_by(key: UserFindKeys , value: string): Promise<User | Error> {
 
     const search_params = {
       id: {id: value },
+      uid: {uid: value },
       email: {email: value },
       name: {name: value },
       cpf_cnpj: {cpf_cnpj: value },
     }
     
     try{
-        let users = await prisma.user.findMany({
+        let user = await prisma.user.findFirst({
             where: search_params[key]
         })
 
-        return !!users ? users : new Error("User not found")
+        return !user || Object.keys(user as Object).length === 0 ? new Error("User not found") : user
     }catch (error : any) {
         return new Error(error)
     }
   }
 
-  public async update(user: User): Promise<User | Error> {
+  public async update(user: UserUpdateInputs): Promise<User | Error> {
     try {
       let updatedUser = await prisma.user.update({
         where: {
