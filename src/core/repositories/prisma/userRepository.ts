@@ -74,7 +74,7 @@ export class UserRepository implements IUserRepository {
     }
   }
 
-  public async update(user: UserUpdateInputs): Promise<User | Error> {
+  public async update(user: UserUpdateInputs | UserUpdateTokensInputs): Promise<User | Error> {
     try {
       let updatedUser = await prisma.user.update({
         where: {

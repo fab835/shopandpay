@@ -7,18 +7,13 @@ import { UserRepository } from "../../../repositories/prisma/userRepository";
 import { IUseCase } from "../../../useCases/IUseCase";
 import { sign, verify } from "jsonwebtoken";
 
-export interface ICreatedUser {
-    user: Object,
-    auth_credential: Object
-}
-
 export class CreateUser implements IUseCase {
 
     constructor ( 
         private readonly userRepository: UserRepository,
     ){}
 
-    public execute = async ({user}: HTTPRequestObject): Promise<ICreatedUser | Error> => {
+    public execute = async ({user}: HTTPRequestObject): Promise<IAuthUser | Error> => {
         try{
             // Verify user params presence
             if(!user) return new Error("Params user not declared")

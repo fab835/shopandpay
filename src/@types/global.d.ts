@@ -13,6 +13,16 @@ declare interface UserUpdateInputs {
     name: string,
 }
 
+declare interface IAuthUser {
+    user: Object,
+    auth_credential: Object
+}
+
+declare interface UserUpdateTokensInputs {
+    id: string,
+    tokens: any
+}
+
 type UserFindKeys = "id" | "uid" | "name" | "cpf_cnpj" | "email";
 declare interface HTTPRequestObject {
     id?: string,

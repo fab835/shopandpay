@@ -6,5 +6,5 @@ export interface IUserRepository {
     find_by(key: UserFindKeys , value: string): Promise<User | Error>
     index(): Promise<User[] | Error>
     updateWallet(id: string, wallet_total_cents: number): Promise<User | Error>
-    update(user: UserUpdateInputs): Promise<User | Error>
+    update(user: UserUpdateInputs | UserUpdateTokensInputs): Promise<User | Error>
 }
