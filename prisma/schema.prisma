@@ -13,6 +13,8 @@ datasource db {
 model User {
   id                      String      @id @default(uuid())
   email                   String      @unique
+  uid                     String      @default("")
+  tokens                  Json?       @db.Json
   name                    String?
   cpf_cnpj                String      @unique
   wallet_total_cents      Int?        @default(0)
