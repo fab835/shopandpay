@@ -8,6 +8,9 @@ It's an API to transfer values between user and store, the transfer can be refun
 ### 1.3 Stack
 Node.js with Prisma ORM, PostgreSql
 
+### 1.4 Features
+We can signup and login as user, create store, transfer values to store and refund transfer if necessary. Before create transfer, a call is made to an external service and After that email and sms will be sent using external service too. The external services is just a mock.
+
 ## 2. Execute application with Docker
 
 - On shell execute: 
